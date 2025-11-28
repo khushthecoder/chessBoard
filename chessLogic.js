@@ -35,6 +35,5 @@ export function initializeBoard() {
         board[0][col] = { type: pieceOrder[col], color: colors.BLACK };
         board[7][col] = { type: pieceOrder[col], color: colors.WHITE };
     }
-    console.log(board)
     return board;
 }

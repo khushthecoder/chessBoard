@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { ChessBishop, ChessKing, ChessKnight, ChessPawn, ChessRook, ChessQueen } from 'lucide-react-native';
-import { initializeBoard,colors,pieces} from './chessLogic';
+import { initializeBoard, colors, pieces } from './chessLogic';
 
-const {width} = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 const BOARD_SIZE = width - 20;
 const SQUARE_SIZE = BOARD_SIZE / 8;
 
@@ -32,57 +32,80 @@ const PieceIcon = ({ type, color }) => {
     }
 };
 
+
 export default function ChessBoard() {
     const [board, setBoard] = useState(initializeBoard());
+    const [vertical,setVertical] = useState(null)
+    const [horizontal,setHorizontal] = useState(null)
+    const [typePiece,setTypePiece] = useState(null)
+    const [playTurn, setPlayTurn] = useState(null)
 
-return (
-  <View style={styles.container}>
-    <Text style={styles.statusText}>
-      Chess Game
-    </Text>
+    const playerMoves = {
+        PAWN: 'pawn',
+        ROOK: 'rook',
+        KNIGHT: 'knight',
+        BISHOP: 'bishop',
+        QUEEN: 'queen',
+        KING: 'king',
+    }
+    console.log(typePiece,vertical,horizontal,playTurn)
 
-    <View style={styles.board}>
-      {board.map((row, rowIndex) => (
-        <View key={rowIndex} style={styles.row}>
-          {row.map((piece, colIndex) => (
-            <TouchableOpacity
-              key={colIndex}
-              style={[
-                styles.square,
-                { backgroundColor: (rowIndex + colIndex) % 2 === 0 ? '#d3971dff' : '#45584aff' }
-              ]}
-            >
-              {piece && <PieceIcon type={piece.type} color={piece.color} />}
-            </TouchableOpacity>
-          ))}
+
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.statusText}>
+                Chess Game
+            </Text>
+
+            <View style={styles.board}>
+                {board.map((row, rowIndex) => (
+                    <View key={rowIndex} style={styles.row}>
+                        {row.map((piece, colIndex) => (
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setVertical(rowIndex)
+                                    setHorizontal(colIndex)
+                                    setTypePiece(piece.type)
+                                    setPlayTurn(piece.color)
+                                }}
+                                key={colIndex}
+                                style={[
+                                    styles.square,
+                                    { backgroundColor: (rowIndex + colIndex) % 2 === 0 ? '#d3971dff' : '#45584aff' }
+                                ]}
+                            >
+                                {piece && <PieceIcon type={piece.type} color={piece.color} />}
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                ))}
+            </View>
         </View>
-      ))}
-    </View>
-  </View>
-);
+    );
 }
 
 const styles = StyleSheet.create({
-square: {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-},
-row: {
-  flex: 1,
-  flexDirection: 'row',
-},
-board: {
-  width: BOARD_SIZE,
-  height: BOARD_SIZE,
-  borderWidth: 2,
-  borderColor: '#333',
-},
-statusText: {
-  fontSize: 20,
-  fontWeight: 'bold',
-  margin: 10,
-  alignSelf: 'center',
-},
+    square: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    board: {
+        width: BOARD_SIZE,
+        height: BOARD_SIZE,
+        borderWidth: 2,
+        borderColor: '#333',
+    },
+    statusText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        margin: 10,
+        alignSelf: 'center',
+    },
 
 });
