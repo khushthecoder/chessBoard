@@ -76,9 +76,7 @@ export default function ChessBoard() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.statusText}>
-                Chess Game
-            </Text>
+            <Text style={styles.statusText}>Black Player</Text>
 
             <View style={styles.board}>
                 {board.map((row, rowIndex) => (
@@ -105,6 +103,7 @@ export default function ChessBoard() {
                     </View>
                 ))}
             </View>
+            <Text style={styles.statusText}>White Player</Text>
         </View>
     );
 }
