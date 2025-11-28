@@ -408,6 +408,10 @@ export function newGame() {
       [colors.WHITE]: { kingSide: true, queenSide: true },
       [colors.BLACK]: { kingSide: true, queenSide: true }
     }
+
+    
   });
+
+
   return _gameState;
 }
