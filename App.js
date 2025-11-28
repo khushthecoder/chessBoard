@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import ChessBoard from './ChessBoard';
+import ChessBoard from './src/ChessBoard';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ChessBoard/>
+      <ChessBoard />
       <StatusBar style="auto" />
     </View>
   );

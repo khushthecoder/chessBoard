@@ -35,8 +35,8 @@ const PieceIcon = ({ type, color }) => {
 
 export default function ChessBoard() {
     const [board, setBoard] = useState(initializeBoard());
-    const [vertical,setVertical] = useState(null)
-    const [horizontal,setHorizontal] = useState(null)
+    const [vertical, setVertical] = useState(null)
+    const [horizontal, setHorizontal] = useState(null)
     const [selectedPiece, setSelectedPiece] = useState(null);
 
     const movePiece = (from, toRow, toCol) => {
@@ -50,27 +50,27 @@ export default function ChessBoard() {
         setBoard(board);
 
     };
-const handlePieceSelect = (rowIndex, colIndex) => {
-    const piece = board[rowIndex][colIndex];
+    const handlePieceSelect = (rowIndex, colIndex) => {
+        const piece = board[rowIndex][colIndex];
 
-    if (!selectedPiece) {
-        if (!piece ||!piece.type) return alert("Please select a piece first")
-        setSelectedPiece({
-            row: rowIndex,
-            col: colIndex,
-            type: piece.type,
-            color: piece.color
-        });
-        return;
-    }
-    if (selectedPiece.row === rowIndex && selectedPiece.col === colIndex) {
+        if (!selectedPiece) {
+            if (!piece || !piece.type) return alert("Please select a piece first")
+            setSelectedPiece({
+                row: rowIndex,
+                col: colIndex,
+                type: piece.type,
+                color: piece.color
+            });
+            return;
+        }
+        if (selectedPiece.row === rowIndex && selectedPiece.col === colIndex) {
+            setSelectedPiece(null);
+            return;
+        }
+        movePiece(selectedPiece, rowIndex, colIndex);
         setSelectedPiece(null);
-        return;
-    }
-    movePiece(selectedPiece, rowIndex, colIndex);
-    setSelectedPiece(null);
-};
-    console.log(vertical,horizontal)
+    };
+    console.log(vertical, horizontal)
 
 
 
